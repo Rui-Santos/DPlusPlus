@@ -1,0 +1,2 @@
+
+oDeezerpp = angular.module('deezerpp', []);
