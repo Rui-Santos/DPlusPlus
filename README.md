@@ -1,4 +1,4 @@
-deezerpp
+DPlusPlus
 ========
 
 Better Deezer interface

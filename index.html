@@ -6,16 +6,22 @@
 	<title>Deezer++</title>
 	
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+	<link rel="stylesheet/less" type="text/css" href="css/style.less" />
+	
+	<!-- TOOLS -->
+	<script type="text/javascript" src="js/less-1.4.1.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+	<script type="text/javascript" src="http://cdn-files.deezer.com/js/min/dz.js"></script>
 	
-	<script type="text/javascript" src="/js/app.js"></script>
-	<script type="text/javascript" src="/js/filters.js"></script>
-	<script type="text/javascript" src="/js/controllers/album.js"></script>
-	<script type="text/javascript" src="/js/controllers/artist.js"></script>
-	<script type="text/javascript" src="/js/controllers/player.js"></script>
-	<script type="text/javascript" src="/js/controllers/search.js"></script>
-	<script type="text/javascript" src="/js/services/deezer-api.js"></script>
+	<!-- APP -->
+	<script type="text/javascript" src="js/app/app.js"></script>
+	<script type="text/javascript" src="js/app/filters.js"></script>
+	<script type="text/javascript" src="js/app/controllers/album.js"></script>
+	<script type="text/javascript" src="js/app/controllers/artist.js"></script>
+	<script type="text/javascript" src="js/app/controllers/player.js"></script>
+	<script type="text/javascript" src="js/app/controllers/search.js"></script>
+	<script type="text/javascript" src="js/app/services/deezer-api.js"></script>
 </head>
 <body>
 
@@ -37,8 +43,21 @@
 	</div>
 	
 	<!-- player -->
-	<section ng-controller="PlayerController" class="player col-md-5 col-md-5">
-		player
+	<section ng-controller="PlayerController" id="player" class="col-md-5 col-md-5">
+		<section class="player">
+			<div class="btn-group btn-group-lg">
+				<button type="button" class="btn btn-default">Prev</button>
+				<button type="button" class="btn btn-default">Play</button>
+				<button type="button" class="btn btn-default">Next</button>
+			</div>
+			<div class="progress progress-striped active">
+				<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+			</div>
+		</section>
+		
+		<ul ng-show="playlist" class="playlist">
+			<li ng-repeat="song in playlist">{{song.name}}</li>
+		</ul>
 	</section>
 </div>
 

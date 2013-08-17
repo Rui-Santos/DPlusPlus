@@ -1,10 +1,8 @@
 <section class="artist row">
-	<div class="col-md-3 col-lg-3">
-		<img ng-src="{{artist.picture}}?size=medium" class="thumbnail" alt="">
-	</div>
-	<h2 class="col-md-9 col-lg-9">{{artist.name}}</h2>
-	
-	<div class="clearfix"></div>
+	<header class="clearfix">
+		<img ng-src="{{artist.picture}}?size=medium" class="thumbnail pull-left" alt="">
+		<h2>{{artist.name}}</h2>
+	</header>
 	
 	<h3>Albums</h3>
 	
