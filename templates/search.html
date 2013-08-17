@@ -1,0 +1,25 @@
+<section class="search">
+	<h2>Search</h2>
+	
+	<form class="form-inline">
+		<div class="form-group">
+			<input ng-model="query" type="text" placeholder="some search">
+		</div>
+		<button ng-click="search()" ng-disabled="!query">Go!</button>
+	</form>
+	
+	<h3 ng-show="results">Results</h3>
+	
+	<table ng-show="results" class="table">
+		<tr>
+			<th>Artist</th>
+			<th>Album</th>
+			<th>Title</th>
+		</tr>
+		<tr ng-repeat="track in results">
+			<td><a href="#/artist/{{track.artist.id}}">{{track.artist.name}}</a></td>
+			<td><a href="#/album/{{track.album.id}}">{{track.album.title}}</a></td>
+			<td>{{track.title}}</td>
+		</tr>
+	</table>
+</section>

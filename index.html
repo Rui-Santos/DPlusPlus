@@ -7,10 +7,12 @@
 	
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
 	
 	<script type="text/javascript" src="/js/app.js"></script>
-	<script type="text/javascript" src="/js/controllers/content.js"></script>
 	<script type="text/javascript" src="/js/controllers/player.js"></script>
+	<script type="text/javascript" src="/js/controllers/search.js"></script>
+	<script type="text/javascript" src="/js/services/deezer-api.js"></script>
 </head>
 <body>
 
@@ -18,13 +20,18 @@
 	<div class="navbar-header">
 		<a class="navbar-brand" href="#">Deezer++</a>
 	</div>
+	<div class="navbar-collapse collapse">
+		<ul class="nav navbar-nav">
+			<li><a href="#/search">Search</a></li>
+		</ul>
+	</div>
 </nav>
 
 <div class="container row">
 	<!-- content -->
-	<section ng-controller="ContentController" class="content col-md-7 col-lg-7">
-		content {{1 + 1}}
-	</section>
+	<div ng-view class="content col-md-7 col-lg-7">
+		content
+	</div>
 	
 	<!-- player -->
 	<section ng-controller="PlayerController" class="player col-md-5 col-md-5">
