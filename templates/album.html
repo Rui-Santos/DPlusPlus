@@ -1,0 +1,27 @@
+<section class="album">
+	<header class="clearfix">
+		<img ng-src="{{album.cover}}?size=medium" class="thumbnail pull-left" alt="">
+	
+		<h2>
+			{{album.title}}
+			<small>by <a href="#/artist/{{album.artist.id}}">{{album.artist.name}}</a></small>
+		</h2>
+		
+		<small>{{album.label}} | {{album.release_date}}</small>
+	</header>
+	
+	<h3>Tracks</h3>
+	
+	<table class="table">
+		<tr>
+			<th>#</th>
+			<th>title</th>
+			<th>duration</th>
+		</tr>
+		<tr ng-repeat="track in album.tracks.data" ng-class="{warning: !track.readable}">
+			<td>{{$index+1}}.</td>
+			<td>{{track.title}}</td>
+			<td>{{track.duration | secToMin}}</td>
+		</tr>
+	</table>
+</section>

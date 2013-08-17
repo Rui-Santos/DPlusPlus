@@ -4,6 +4,11 @@
 	{
 		var _sBaseUrl = 'https://api.deezer.com/2.0/';
 
+		this.getAlbum = function(iId)
+		{
+			return _makeRequest('album/'+ iId);
+		};
+		
 		/**
 		 * Returns artist object
 		 * 

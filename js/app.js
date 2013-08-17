@@ -7,6 +7,14 @@ oDeezerpp.config([
 	function($routeProvider, $locationProvider)
 	{
 		$routeProvider.when(
+			'/album/:id',
+			{
+				controller:	 'AlbumController',
+				templateUrl: '/templates/album.html'
+			}
+		);
+		
+		$routeProvider.when(
 			'/artist/:id',
 			{
 				controller:	 'ArtistController',
