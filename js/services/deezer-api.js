@@ -3,6 +3,28 @@
 	function DeezerApiService($http, $q)
 	{
 		var _sBaseUrl = 'https://api.deezer.com/2.0/';
+
+		/**
+		 * Returns artist object
+		 * 
+		 * @param	{Int}		iId		artist ID
+		 * @returns	{Promise}
+		 */
+		this.getArtist = function(iId)
+		{
+			return _makeRequest('artist/'+ iId);
+		};
+
+		/**
+		 * Returns array of artist albums
+		 * 
+		 * @param	{Int}		iId		artist ID
+		 * @returns	{Promise}
+		 */
+		this.getArtistAlbums = function(iId)
+		{
+			return _makeRequest('artist/'+ iId +'/albums');
+		};
 		
 		/**
 		 * Wrapper for the search API
@@ -17,7 +39,7 @@
 		 * 
 		 * @param	{String}	sPath
 		 * @param	{Object}	oData
-		 * @returns	{Undefined}
+		 * @returns	{Promise}
 		 */
 		function _makeRequest(sPath, oData)
 		{

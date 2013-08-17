@@ -7,6 +7,14 @@ oDeezerpp.config([
 	function($routeProvider, $locationProvider)
 	{
 		$routeProvider.when(
+			'/artist/:id',
+			{
+				controller:	 'ArtistController',
+				templateUrl: '/templates/artist.html'
+			}
+		);
+		
+		$routeProvider.when(
 			'/search',
 			{
 				controller:	 'SearchController',
