@@ -16,12 +16,15 @@
 	
 	<!-- APP -->
 	<script type="text/javascript" src="js/app/app.js"></script>
+	<script type="text/javascript" src="js/app/config.js"></script>
 	<script type="text/javascript" src="js/app/filters.js"></script>
 	<script type="text/javascript" src="js/app/controllers/album.js"></script>
 	<script type="text/javascript" src="js/app/controllers/artist.js"></script>
 	<script type="text/javascript" src="js/app/controllers/player.js"></script>
 	<script type="text/javascript" src="js/app/controllers/search.js"></script>
 	<script type="text/javascript" src="js/app/services/deezer-api.js"></script>
+	<script type="text/javascript" src="js/app/services/deezer-player.js"></script>
+	<script type="text/javascript" src="js/app/services/playlist.js"></script>
 </head>
 <body>
 
@@ -44,20 +47,31 @@
 	
 	<!-- player -->
 	<section ng-controller="PlayerController" id="player" class="col-md-5 col-md-5">
-		<section class="player">
+		<!-- deezer stuff -->
+		<div id="dz-root"></div>
+		
+		<h2>{{playlist[position].title}}</h2>
+		
+		<!-- player controls -->
+		<section class="controls">
 			<div class="btn-group btn-group-lg">
-				<button type="button" class="btn btn-default">Prev</button>
-				<button type="button" class="btn btn-default">Play</button>
-				<button type="button" class="btn btn-default">Next</button>
+				<button ng-click="playPrev($event)" class="btn btn-default">Prev</button>
+				<button ng-click="play($event)" ng-show="paused || (!paused && !playing)" class="btn btn-default">Play</button>
+				<button ng-click="pause($event)" ng-show="playing" class="btn btn-default">Pause</button>
+				<button ng-click="playNext($event)" class="btn btn-default">Next</button>
 			</div>
-			<div class="progress progress-striped active">
-				<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+			<div class="progress progress-striped" ng-class="{active: playing}">
+				<div class="progress-bar" role="progressbar" aria-valuenow="{{current.seek}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width: current.seek+'%'}"></div>
 			</div>
 		</section>
 		
-		<ul ng-show="playlist" class="playlist">
-			<li ng-repeat="song in playlist">{{song.name}}</li>
-		</ul>
+		<!-- playlist -->
+		<ol ng-show="playlist" id="playlist">
+			<li ng-repeat="song in playlist" ng-class="{current: ($index==position)}">
+				<a href="#" ng-click="playSelected($index, $event)">{{song.title|substr:50}}</a>
+				<small>{{song.artist.name}}</small>
+			</li>
+		</ol>
 	</section>
 </div>
 

@@ -2,7 +2,7 @@
 {
 	function filterSubstr(sStr, iCount)
 	{
-		if(sStr.lenght <= iCount)
+		if(sStr.length <= iCount)
 		{
 			return sStr;
 		}

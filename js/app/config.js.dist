@@ -1,0 +1,14 @@
+(function(oDeezerpp)
+{
+	// application config
+	oDeezerpp.constant(
+		'AppSettings',
+		{
+			dz: {
+				appid:		1,
+				channel:	'url'
+			}
+		}
+	);
+	
+})(oDeezerpp);

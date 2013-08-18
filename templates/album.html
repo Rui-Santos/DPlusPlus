@@ -8,6 +8,11 @@
 		</h2>
 		
 		<small>{{album.label}} | {{album.release_date}}</small>
+		
+		<div>
+			<button ng-click="playNow($event)" class="btn btn-default">Play now</button>
+			<button ng-click="playLast($event)" class="btn btn-default">Play last</button>
+		</div>
 	</header>
 	
 	<h3>Tracks</h3>
