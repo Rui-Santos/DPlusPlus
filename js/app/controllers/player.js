@@ -204,6 +204,7 @@
 				return;
 			}
 
+			$scope.current.time = (oData[0] / 60).toFixed(2);
 			$scope.current.seek = iNow;
 
 			if(!bInside)

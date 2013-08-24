@@ -1,4 +1,4 @@
-<section class="artist row">
+<section class="artist">
 	<header class="clearfix">
 		<img ng-src="{{artist.picture}}?size=medium" class="thumbnail pull-left" alt="">
 		<h2>{{artist.name}}</h2>
@@ -6,13 +6,15 @@
 	
 	<h3>Albums</h3>
 	
-	<article ng-repeat="album in albums" class="album col-md-3 col-lg-3">
-		<div class="thumbnail">
-			<img ng-src="{{album.cover}}?size=medium" />
-			
-			<div class="caption">
-				<a href="#/album/{{album.id}}" title="{{album.title}}">{{album.title|substr:12}}</a>
+	<div class="row">
+		<article ng-repeat="album in albums" class="album col-md-3 col-lg-3">
+			<div class="thumbnail">
+				<img ng-src="{{album.cover}}?size=medium" />
+				
+				<div class="caption">
+					<a href="#/album/{{album.id}}" title="{{album.title}}">{{album.title|substr:12}}</a>
+				</div>
 			</div>
-		</div>
-	</article>
+		</article>
+	</div>
 </section>

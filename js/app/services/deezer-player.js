@@ -5,7 +5,7 @@
 	 * 
 	 * @param	{Object}	$rootScope
 	 */
-	function DeezerPlayerService($rootScope, oAppSettings)
+	function DeezerPlayerService($rootScope, $log, oAppSettings)
 	{
 		var _bPaused	= false,
 			_bPlaying	= false,
@@ -75,7 +75,7 @@
 					{
 						_bReady = true;
 
-console.log('player-ready');
+$log.debug('player-ready');
 						$rootScope.$broadcast('player-ready');
 						$rootScope.$apply();
 					}
@@ -85,6 +85,7 @@ console.log('player-ready');
 			// player starts play a song
 			DZ.Event.subscribe('player_play', function()
 			{
+$log.debug('DZ: player_play');
 				_bPlaying	= true;
 				_bPaused	= false;
 				_sendStatus();
@@ -93,6 +94,7 @@ console.log('player-ready');
 			// player is paused
 			DZ.Event.subscribe('player_paused', function()
 			{
+$log.debug('DZ: player_paused');
 				_bPlaying	= false;
 				_bPaused	= true;
 				_sendStatus();
@@ -101,31 +103,32 @@ console.log('player-ready');
 			// player plays a song
 			DZ.Event.subscribe('player_position', function(aData)
 			{
+$log.debug('DZ: player_position', aData[0], aData[1], _iCurrent);
+				// new song
+				if(aData[0] > 0 && _iCurrent === null)
+				{
+					_iCurrent = 1;
+				}
+				// end of a song
+				else if(aData[0] == 0 && _iCurrent !== null)
+				{
+					_iCurrent	= null;
+					_bPaused	= false;
+					_bPlaying	= false;
+					_sendStatus();
+				}
+				
 				for(var i = 0; i < _aBindProgress.length; i++)
 				{
 					_aBindProgress[i](aData);
-				}
-
-				if(aData[0] == 0)
-				{
-					if(_iCurrent == 0)	// beginning of song
-					{
-						_iCurrent++;
-					}
-					else				// end of song
-					{
-						_iCurrent	= 0;
-						_bPaused	= false;
-						_bPlaying	= false;
-						_sendStatus();
-					}
 				}
 			});
 
 			// current track is changing
 			DZ.Event.subscribe('current_track', function(oData)
 			{
-				_iCurrent = 0;
+				_iCurrent = null;
+$log.debug('DZ: current_track', _iCurrent);
 			});
 		}
 
@@ -161,7 +164,7 @@ console.log('player-ready');
 			{
 				sStatus = 'paused';
 			}
-console.log('player-status: '+ sStatus);
+$log.debug('player-status: '+ sStatus);
 			$rootScope.$broadcast('player-status', sStatus);
 			
 			if(bOutside)
@@ -175,7 +178,7 @@ console.log('player-status: '+ sStatus);
 	
 	oDeezerpp.service(
 		'DeezerPlayerService',
-		['$rootScope', 'AppSettings', DeezerPlayerService]
+		['$rootScope', '$log', 'AppSettings', DeezerPlayerService]
 	);
 	
 })(oDeezerpp);
