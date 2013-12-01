@@ -1,4 +1,4 @@
-<section class="album">
+<section id="album-page">
 	<header class="clearfix">
 		<img ng-src="{{album.cover}}?size=medium" class="thumbnail pull-left" alt="">
 	
@@ -10,8 +10,12 @@
 		<small>{{album.label}} | {{album.release_date}}</small>
 		
 		<div>
-			<button ng-click="playNow($event)" class="btn btn-default">Play now</button>
-			<button ng-click="playLast($event)" class="btn btn-default">Play last</button>
+			<button ng-click="playNow($event)" class="btn btn-default">
+				<span class="glyphicon glyphicon-play"></span> Play now
+			</button>
+			<button ng-click="playLast($event)" class="btn btn-default">
+				<span class="glyphicon glyphicon-plus-sign"></span> Play last
+			</button>
 		</div>
 	</header>
 	

@@ -74,7 +74,7 @@
 			}
 			
 			$scope.position = iPos;
-			_playCurrent();
+			_playCurrent(true);
 		};
 		
 // playback

@@ -5,15 +5,16 @@ body {
 	padding-top: 70px;
 }
 
-#player, #playlist {
+.clear-margins {
+	margin: 0px;
+	padding: 0px;
 }
 
 #player {
 	position: fixed;
 	top: 70px;
 	bottom: 20px;
-	padding: 10px;
-	margin: 0px;
+	padding: 15px;
 
 	color: #fff;
 	background: @player-bg;
@@ -33,22 +34,18 @@ body {
 }
 
 #playlist {
-	position: fixed;
-	top: 210px;
-	bottom: 20px;
-	padding: 0px;
-	margin: 0px 0px 0px -10px;
+	.clear-margins;
+	position: absolute;
+	top: 130px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
 
 	z-index: 200;
 	overflow-y: auto;
 	
-	a, small {
-		dispaly: block;
-	}
-	
-	a {
-		color: lighten(@link-color, 30%);
-	}
+	a, small {dispaly: block;}
+	a {color: lighten(@link-color, 30%);}
 	
 	small {
 		font-size: 10px;
@@ -56,7 +53,7 @@ body {
 	}
 	
 	ol {
-		padding: 0px 10px;
+		.clear-margins;
 		counter-reset: li;
 		list-style-type: none;
 	}
@@ -83,6 +80,41 @@ body {
 	}
 }
 
-.content {
-	padding-left: 50px;
+@media(max-width:767px){
+	#player {width: 33.33%;}
+}
+@media(min-width:768px){
+	#player {width: 250px;}
+}
+@media(min-width:992px){
+	#player {width: 320px;}
+}
+@media(min-width:1200px){
+	#player {width: 390px;}
+}
+
+// headers
+#album-page header,
+#artist-page header {
+	h2 {margin-top: 0px;}
+	img {margin-right: 10px;}
+	small {
+		display: block;
+		margin-bottom: 10px;
+	}
+}
+
+#artist-page {
+	.album {
+		float: left;
+		width: 140px;
+		padding-right: 15px;
+	}
+	.caption {
+		padding: 5px 0px 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	h3 {margin-top: 0px;}
 }

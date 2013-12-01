@@ -44,7 +44,7 @@
 <div class="row">
 	
 	<!-- player -->
-	<section ng-controller="PlayerController" id="player" class="col-md-4 col-lg-4">
+	<section ng-controller="PlayerController" id="player">
 		<!-- deezer stuff -->
 		<div id="dz-root"></div>
 		
@@ -86,7 +86,7 @@
 		</section>
 
 		<!-- playlist -->
-		<div ng-show="playlist" id="playlist" class="col-md-4 col-lg-4">
+		<div ng-show="playlist" id="playlist">
 			<ol>
 				<li ng-repeat="song in playlist" ng-class="{current: ($index==position)}">
 					<a href="#" ng-click="playSelected($index, $event)">{{song.title|substr:50}}</a>
@@ -98,7 +98,7 @@
 	</section>
 	
 	<!-- content -->
-	<div ng-view class="content col-md-8  col-md-offset-4 col-lg-8  col-lg-offset-4">
+	<div ng-view class="content col-sm-8 col-sm-offset-4 col-md-8 col-md-offset-4 col-lg-8 col-lg-offset-4">
 		content
 	</div>
 </div>
