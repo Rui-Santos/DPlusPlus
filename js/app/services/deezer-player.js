@@ -5,14 +5,14 @@
 	 * 
 	 * @param	{Object}	$rootScope
 	 */
-	function DeezerPlayerService($rootScope, $log, oAppSettings)
+	function DeezerPlayerService($rootScope, $log, oSdk)
 	{
 		var _bPaused	= false,
 			_bPlaying	= false,
 			_bReady		= false,
 			_iCurrent	= null,
 			_aBindProgress	= [];
-		
+
 		/**
 		 * Direct progress binding (cpu saving)
 		 * 
@@ -67,21 +67,11 @@
 		 */
 		function _init()
 		{
-			DZ.init({
-				appId:		oAppSettings.dz.appid,
-				channelUrl: oAppSettings.dz.channel,
-				player:	{
-					onload: function()
-					{
-						_bReady = true;
+			if(_bReady)
+			{
+				return;
+			}
 
-$log.debug('player-ready');
-						$rootScope.$broadcast('player-ready');
-						$rootScope.$apply();
-					}
-				}
-			});
-			
 			// player starts play a song
 			DZ.Event.subscribe('player_play', function()
 			{
@@ -130,6 +120,8 @@ $log.debug('DZ: player_position', aData[0], aData[1], _iCurrent);
 				_iCurrent = null;
 $log.debug('DZ: current_track', _iCurrent);
 			});
+
+			_bReady = true;
 		}
 
 		/**
@@ -172,13 +164,14 @@ $log.debug('player-status: '+ sStatus);
 				$rootScope.$apply();
 			}
 		}
-		
-		angular.element(document).ready(_init);
+
+		// initialise player after SDK
+		$rootScope.$on('deezer-sdk-ready', _init);
 	}
 	
 	oDeezerpp.service(
 		'DeezerPlayerService',
-		['$rootScope', '$log', 'AppSettings', DeezerPlayerService]
+		['$rootScope', '$log', 'DeezerSdkService', DeezerPlayerService]
 	);
 	
 })(oDeezerpp);

@@ -3,8 +3,8 @@ oDeezerpp = angular.module('deezerpp', ['ngRoute']);
 
 // routing config
 oDeezerpp.config([
-	'$routeProvider', '$locationProvider', '$logProvider', 'AppSettings',
-	function($routeProvider, $locationProvider, $logProvider, oAppSettings)
+	'$routeProvider', '$logProvider', 'AppSettings',
+	function($routeProvider, $logProvider, oAppSettings)
 	{
 		$routeProvider
 			.when(

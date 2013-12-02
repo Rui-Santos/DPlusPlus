@@ -10,8 +10,8 @@
 	
 	<!-- TOOLS -->
 	<script type="text/javascript" src="js/less-1.4.1.min.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular.min.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular-route.min.js"></script>
 	<script type="text/javascript" src="http://cdn-files.deezer.com/js/min/dz.js"></script>
 	
 	<!-- APP -->
@@ -20,21 +20,25 @@
 	<script type="text/javascript" src="js/app/filters.js"></script>
 	<script type="text/javascript" src="js/app/controllers/album.js"></script>
 	<script type="text/javascript" src="js/app/controllers/artist.js"></script>
+	<script type="text/javascript" src="js/app/controllers/menu.js"></script>
 	<script type="text/javascript" src="js/app/controllers/player.js"></script>
 	<script type="text/javascript" src="js/app/controllers/search.js"></script>
 	<script type="text/javascript" src="js/app/services/deezer-api.js"></script>
 	<script type="text/javascript" src="js/app/services/deezer-player.js"></script>
+	<script type="text/javascript" src="js/app/services/deezer-sdk.js"></script>
 	<script type="text/javascript" src="js/app/services/playlist.js"></script>
 </head>
 <body class="container">
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav ng-controller="MenuController" class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">DPlusPlus</a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
+				<li ng-if="logged">Hello, {{name}}! <a href="#" ng-click="logout($event)">(logout)</a></li>
+				<li ng-if="!logged"><a href="#" ng-click="login($event)">Login</a></li>
 				<li><a href="#/search">Search</a></li>
 			</ul>
 		</div>
@@ -57,29 +61,29 @@
 		</header>
 		
 		<!-- player controls -->
-		<section class="controls">
+		<section class="controls clearfix">
 			<div class="btn-group btn-group-lg">
-				<button ng-click="playPrev($event)" class="btn btn-default btn-lg">
+				<button ng-click="playPrev($event)" class="btn btn-default">
 					<span class="glyphicon glyphicon-step-backward"></span>
 				</button>
-				<button ng-click="play($event)" ng-show="paused || (!paused && !playing)" class="btn btn-default btn-lg">
+				<button ng-click="play($event)" ng-show="paused || (!paused && !playing)" class="btn btn-default">
 					<span class="glyphicon glyphicon-play"></span>
 				</button>
-				<button ng-click="pause($event)" ng-show="playing" class="btn btn-default btn-lg">
+				<button ng-click="pause($event)" ng-show="playing" class="btn btn-default">
 					<span class="glyphicon glyphicon-pause"></span>
 				</button>
-				<button ng-click="playNext($event)" class="btn btn-default btn-lg">
+				<button ng-click="playNext($event)" class="btn btn-default">
 					<span class="glyphicon glyphicon-step-forward"></span>
 				</button>
 			</div>
-			<div class="btn-group btn-group-lg">
-				<button ng-click="volumeDown($event)" class="btn btn-default btn-sm">
+			<div class="btn-group btn-group-lg pull-right">
+				<button ng-click="volumeDown($event)" class="btn btn-default">
 					<span class="glyphicon glyphicon-volume-up"></span>
 				</button>
-				<button ng-click="valumeMute($event)" class="btn btn-default btn-sm">
+				<button ng-click="valumeMute($event)" class="btn btn-default">
 					<span class="glyphicon glyphicon-repeat"></span>
 				</button>
-				<button ng-click="volumeUp($event)" class="btn btn-default btn-sm">
+				<button ng-click="volumeUp($event)" class="btn btn-default">
 					<span class="glyphicon glyphicon-random"></span>
 				</button>
 			</div>
