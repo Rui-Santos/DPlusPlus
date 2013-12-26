@@ -6,7 +6,7 @@
 		{
 			dz: {
 				appid:		'123285',
-				channel:	'http://luinnar.github.io/DPlusPlus/channel.html'
+				channel:	'http://luinnar.github.io/DPlusPlus'
 			},
 			debug: false
 		}
