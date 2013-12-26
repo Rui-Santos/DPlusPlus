@@ -5,7 +5,7 @@
 		'AppSettings',
 		{
 			dz: {
-				appid:		123285,
+				appid:		'123285',
 				channel:	'http://luinnar.github.io/DPlusPlus/channel.html'
 			},
 			debug: false
