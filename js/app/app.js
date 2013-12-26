@@ -11,21 +11,21 @@ oDeezerpp.config([
 				'/album/:id',
 				{
 					controller:	 'AlbumController',
-					templateUrl: '/templates/album.html'
+					templateUrl: 'templates/album.html'
 				}
 			)
 			.when(
 				'/artist/:id',
 				{
 					controller:	 'ArtistController',
-					templateUrl: '/templates/artist.html'
+					templateUrl: 'templates/artist.html'
 				}
 			)
 			.when(
 				'/search',
 				{
 					controller:	 'SearchController',
-					templateUrl: '/templates/search.html'
+					templateUrl: 'templates/search.html'
 				}
 			);
 		
