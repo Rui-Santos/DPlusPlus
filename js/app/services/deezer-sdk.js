@@ -46,7 +46,7 @@
 							_oUser = oUser;
 							_oUser.id = oResponse.userID;
 							
-							$rootScope.broadcast('user-logged-in', _oUser);
+							$rootScope.$broadcast('user-logged-in', _oUser);
 
 							oDeferred.resolve(_oUser);
 						});
@@ -75,7 +75,7 @@
 			
 			DZ.logout();
 
-			$rootScope.broadcast('user-logged-out');
+			$rootScope.$broadcast('user-logged-out');
 		};
 
 	// private methods
