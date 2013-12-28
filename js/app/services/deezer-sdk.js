@@ -8,10 +8,19 @@
 	function DeezerSdkService($rootScope, $q, $log, $document, oAppSettings)
 	{
 		var _bReady		= false,
-			_oUser		= null,
-			_sToken		= null;
+			_oUser		= null;
 
 	// user methods
+
+		/**
+		 * Returns user object or NULL
+		 * 
+		 * @returns	{Object|Null}
+		 */
+		this.getUser = function()
+		{
+			return _oUser;
+		};
 		
 		/**
 		 * Is user logged in?
@@ -60,10 +69,10 @@
 				},
 				{perms: oAppSettings.dz.perms}
 			);
-			
+
 			return oDeferred.promise;
 		};
-		
+
 		/**
 		 * Logout action
 		 * 
@@ -76,6 +85,30 @@
 			DZ.logout();
 
 			$rootScope.$broadcast('user-logged-out');
+		};
+
+		/**
+		 * Perform API request
+		 * 
+		 * @param	{String}	relative API URL
+		 * @param	{String}	GET|POST
+		 * @param	{Object}	additional data
+		 * @returns	{$q}
+		 */
+		this.request = function(sUrl, sMethod, oData)
+		{
+			_isReady();
+			
+			var oDeferred	= $q.defer();
+				sMethod		= (sMethod ? sMethod : 'GET');
+			
+			DZ.api(sUrl, sMethod, oData, function(oData)
+			{
+				oDeferred.resolve(oData);
+				$rootScope.$apply();
+			});
+
+			return oDeferred.promise;
 		};
 
 	// private methods

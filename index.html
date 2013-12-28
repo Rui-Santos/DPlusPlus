@@ -10,9 +10,11 @@
 	
 	<!-- TOOLS -->
 	<script type="text/javascript" src="js/less-1.4.1.min.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular-route.min.js"></script>
-	<script type="text/javascript" src="http://cdn-files.deezer.com/js/min/dz.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.min.js"></script>
+	<script type="text/javascript" src="//cdn-files.deezer.com/js/min/dz.js"></script>
 	
 	<!-- APP -->
 	<script type="text/javascript" src="js/app/app.js"></script>
@@ -41,9 +43,16 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li ng-if="logged">Hello, {{name}}! <a href="#" ng-click="logout($event)">(logout)</a></li>
-				<li ng-if="!logged"><a href="#" ng-click="login($event)">Login</a></li>
 				<li><a href="#/search">Search</a></li>
+				
+				<li ng-if="logged" class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello, {{name}}! <b class="caret"></b></a>
+					
+					<ul class="dropdown-menu">
+						<li><a href="#" ng-click="logout($event)">Logout</a></li>
+					</ul>
+				</li>
+				<li ng-if="!logged"><a href="#" ng-click="login($event)">Login</a></li>
 			</ul>
 		</div>
 	</div>

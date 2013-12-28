@@ -1,12 +1,16 @@
 (function(oDeezerpp)
 {
-	function DeezerApiService($http, $q)
+	function DeezerApiService(oSdk)
 	{
-		var _sBaseUrl = 'https://api.deezer.com/2.0/';
-
+		/**
+		 * Returns album object
+		 * 
+		 * @param	{Int}		iId		album ID
+		 * @returns	{Promise}
+		 */
 		this.getAlbum = function(iId)
 		{
-			return _makeRequest('album/'+ iId);
+			return oSdk.request('album/'+ iId);
 		};
 		
 		/**
@@ -17,7 +21,7 @@
 		 */
 		this.getArtist = function(iId)
 		{
-			return _makeRequest('artist/'+ iId);
+			return oSdk.request('artist/'+ iId);
 		};
 
 		/**
@@ -28,7 +32,7 @@
 		 */
 		this.getArtistAlbums = function(iId)
 		{
-			return _makeRequest('artist/'+ iId +'/albums');
+			return oSdk.request('artist/'+ iId +'/albums');
 		};
 		
 		/**
@@ -36,49 +40,13 @@
 		 */
 		this.search = function(sQuery, sOrder)
 		{
-			return _makeRequest('search', {q: sQuery});
+			return oSdk.request('search', 'GET', {q: sQuery});
 		};
-		
-		/**
-		 * Makes requests ;)
-		 * 
-		 * @param	{String}	sPath
-		 * @param	{Object}	oData
-		 * @returns	{Promise}
-		 */
-		function _makeRequest(sPath, oData)
-		{
-			var oDeferred	= $q.defer(),
-				oOptions	= {
-					params: {
-						output:		'jsonp',
-						callback:	'JSON_CALLBACK'
-					}
-				};
-				sPath		= _sBaseUrl + sPath;
-			
-			if(angular.isObject(oData))
-			{
-				oOptions.params = angular.extend(oData, oOptions.params);
-			}
-			
-			$http.jsonp(sPath, oOptions)
-				.success(function(oData)
-				{
-					oDeferred.resolve(oData);
-				})
-				.error(function(oData, status, headers, config)
-				{
-					oDeferred.reject({error: true});
-				});
-			
-			return oDeferred.promise;
-		}
 	}
 	
 	oDeezerpp.service(
 		'DeezerApiService',
-		['$http', '$q', DeezerApiService]
+		['DeezerSdkService', DeezerApiService]
 	);
 	
 })(oDeezerpp);
