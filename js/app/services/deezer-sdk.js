@@ -111,6 +111,30 @@
 			return oDeferred.promise;
 		};
 
+		/**
+		 * Resolver
+		 * 
+		 * @returns	{$q}
+		 */
+		this.resolve = function()
+		{
+			var oDeferred = $q.defer();
+			
+			if(_bReady)
+			{
+				oDeferred.resolve();
+			}
+			else
+			{
+				$rootScope.$on('deezer-sdk-ready', function()
+				{
+					oDeferred.resolve();
+				});
+			}
+
+			return oDeferred.promise;
+		};
+		
 	// private methods
 
 		/**

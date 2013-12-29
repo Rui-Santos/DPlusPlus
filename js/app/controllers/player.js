@@ -11,6 +11,9 @@
 		$scope.paused	= false;	// is any track loaded
 		$scope.playing	= false;	// are we shuffling now?
 		$scope.position	= undefined;// current position on playlist
+		
+		$scope.artists	= {};		// artists list
+		$scope.albums	= {};		// albums list
 		$scope.playlist	= [];		// playlist array
 		
 // playlist operations
@@ -150,17 +153,67 @@
 			});
 			
 			// 
-			$scope.$on('playlist-add', function(oEvent, aTracks)
+			$scope.$on('playlist-add-tracks', function(oEvent, oData)
 			{
-				_addTracks(aTracks, false);
+				_addArtists(oData.artists);
+				_addAlbums(oData.albums);
+				_addTracks(oData.tracks, false);
 			});
 			
 			// 
-			$scope.$on('playlist-play', function(oEvent, aTracks)
+			$scope.$on('playlist-play-tracks', function(oEvent, oData)
 			{
-				_addTracks(aTracks, true);
+				_addArtists(oData.artists);
+				_addAlbums(oData.albums);
+				_addTracks(oData.tracks, true);
 				_playCurrent();
 			});
+		}
+		
+		/**
+		 * Adds albums data to playlist
+		 * 
+		 * @param	{Array}	aAlbums
+		 * @returns	{Undefined}
+		 */
+		function _addAlbums(aAlbums)
+		{
+			for(var i = 0; i < aAlbums.length; i++)
+			{
+				if($scope.albums[aAlbums[i].id])
+				{
+					continue;
+				}
+				
+				$scope.albums[aAlbums[i].id] = {
+					count:	0,
+					image:	aAlbums[i].image,
+					title:	aAlbums[i].title
+				};
+			}
+		}
+
+		/**
+		 * Adds artists data to playlist
+		 * 
+		 * @param	{Array}	aArtists
+		 * @returns	{Undefined}
+		 */
+		function _addArtists(aArtists)
+		{
+			for(var i = 0; i < aArtists.length; i++)
+			{
+				if($scope.artists[aArtists[i].id])
+				{
+					continue;
+				}
+				
+				$scope.artists[aArtists[i].id] = {
+					count:	0,
+					image:	aArtists[i].image,
+					name:	aArtists[i].name
+				};
+			}
 		}
 		
 		/**
@@ -185,6 +238,12 @@
 			else
 			{
 				$scope.playlist = $scope.playlist.concat(aTracks);
+			}
+			
+			for(var i = 0; i < aTracks.length; i++)
+			{
+				$scope.artists[aTracks[i].artist].count++;
+				$scope.albums[aTracks[i].album].count++;
 			}
 		};
 

@@ -25,9 +25,9 @@
 	<script type="text/javascript" src="js/app/controllers/menu.js"></script>
 	<script type="text/javascript" src="js/app/controllers/player.js"></script>
 	<script type="text/javascript" src="js/app/controllers/search.js"></script>
+	<script type="text/javascript" src="js/app/services/deezer-sdk.js"></script>
 	<script type="text/javascript" src="js/app/services/deezer-api.js"></script>
 	<script type="text/javascript" src="js/app/services/deezer-player.js"></script>
-	<script type="text/javascript" src="js/app/services/deezer-sdk.js"></script>
 	<script type="text/javascript" src="js/app/services/playlist.js"></script>
 </head>
 <body class="container">
@@ -38,7 +38,7 @@
 			<span class="navbar-brand">
 				<a href="#">DPlusPlus</a>
 				<small>powered by</small>	
-				<a href="#" class="deezer">Deezer</a>
+				<a href="http://deezer.com" class="deezer">Deezer</a>
 			</span>
 		</div>
 		<div class="navbar-collapse collapse">
@@ -66,7 +66,7 @@
 		<div id="dz-root"></div>
 		
 		<header>
-			<h2>{{playlist[position].title}} <small>by {{playlist[position].artist.name}}</small></h2>
+			<h2>{{playlist[position].title}} <small>by {{artists[playlist[position].artist].name}}</small></h2>
 			
 			<div class="progress progress-striped" ng-class="{active: playing}">
 				<div class="progress-bar" role="progressbar" aria-valuenow="{{current.seek}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width: current.seek+'%'}"></div>
@@ -107,7 +107,7 @@
 			<ol>
 				<li ng-repeat="song in playlist" ng-class="{current: ($index==position)}">
 					<a href="#" ng-click="playSelected($index, $event)">{{song.title|substr:50}}</a>
-					<small>{{song.artist.name}}</small>
+					<small>{{artists[song.artist].name}}</small>
 				</li>
 			</ol>
 		</div>

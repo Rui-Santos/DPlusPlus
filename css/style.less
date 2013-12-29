@@ -114,10 +114,24 @@ body {
 
 #artist-page {
 	.album {
-		float: left;
-		width: 140px;
-		padding-right: 15px;
+		margin-bottom: 5px;
+		
+		h4 {
+			display: inline-block;
+			margin: 5px 10px;
+		}
+		
+		img {margin: 0px;}
+		
+		.actions {
+			margin-left: 70px;
+			display: none;
+		}
+		&:hover .actions {
+			display: block;
+		}
 	}
+	
 	.caption {
 		padding: 5px 0px 0px;
 		overflow: hidden;

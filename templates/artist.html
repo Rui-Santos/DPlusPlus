@@ -6,15 +6,18 @@
 	
 	<h3>Albums</h3>
 	
-	<div class="clearfix">
-		<article ng-repeat="album in albums" class="album">
-			<div class="thumbnail">
-				<img ng-src="{{album.cover}}?size=medium" />
-				
-				<div class="caption">
-					<a href="#/album/{{album.id}}" title="{{album.title}}">{{album.title}}</a>
-				</div>
-			</div>
-		</article>
-	</div>
+	<article ng-repeat="album in albums" class="album clearfix">
+		<a href="#/album/{{album.id}}" title="{{album.title}}">
+			<img ng-src="{{album.cover}}?size=small" class="thumbnail pull-left" />
+			<h4>{{album.title}}</h4>
+		</a>
+		<div class="actions">
+			<button ng-click="playNow(album.id, $event)" class="btn btn-sm" title="Play now">
+				<span class="glyphicon glyphicon-play"></span>
+			</button>
+			<button ng-click="playLast(album.id, $event)" class="btn btn-sm" title="Play last">
+				<span class="glyphicon glyphicon-plus-sign"></span>
+			</button>
+		</div>
+	</article>
 </section>
