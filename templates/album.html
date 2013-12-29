@@ -23,14 +23,25 @@
 	
 	<table class="table">
 		<tr>
-			<th>#</th>
-			<th>title</th>
-			<th>duration</th>
+			<th class="tbl-pos">#</th>
+			<th class="tbl-title">title</th>
+			<th class="tbl-time">duration</th>
 		</tr>
 		<tr ng-repeat="track in album.tracks.data" ng-class="{warning: !track.readable}">
-			<td>{{$index+1}}.</td>
-			<td>{{track.title}}</td>
-			<td>{{track.duration | secToMin}}</td>
+			<td class="tbl-pos">{{$index+1}}.</td>
+			<td class="tbl-title">
+				<span class="action">
+					<button ng-click="playSingleNow($index, $event)" class="btn btn-xs">
+						<span class="glyphicon glyphicon-play"></span>
+					</button>
+					<button ng-click="playSingleLast($index, $event)" class="btn btn-xs">
+						<span class="glyphicon glyphicon-plus-sign"></span>
+					</button>
+				</span>
+
+				{{track.title}}
+			</td>
+			<td class="tbl-time">{{track.duration * 1000 | date:'mm:ss'}}</td>
 		</tr>
 	</table>
 </section>
