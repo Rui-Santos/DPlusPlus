@@ -112,6 +112,34 @@ body {
 	}
 }
 
+#album-page {
+	.tbl-pos {
+		width: 5%;
+		text-align: right;
+	}
+	.tbl-title {
+		width: 80%;
+	}
+	.tbl-time {
+		width: 15%;
+		text-align: right;
+	}
+	
+	tr {
+		.action {
+			display: none;
+			float: right;
+		}
+		&:hover .action {
+			display: block;
+		}
+
+		button {
+			margin: -2px 0px;
+		}
+	}
+}
+
 #artist-page {
 	.album {
 		margin-bottom: 5px;
