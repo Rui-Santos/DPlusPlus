@@ -1,20 +1,16 @@
 (function(oDeezerpp)
 {
-	function AlbumController($scope, $routeParams, oDeezerApi, oPlaylist)
+	function AlbumController($scope, $routeParams, oDeezerApi, oPlaylist, AlbumFilter)
 	{
-		/**
-		 * Formatted album tracks
-		 */
-		var _aTracks;
-		
 		/**
 		 * Add album at end of a playlist
 		 */
 		$scope.playLast = function($event)
 		{
 			$event.preventDefault();
-
-			oPlaylist.add(_getTracks());
+			
+			var oTmp = AlbumFilter($scope.album);
+			oPlaylist.add(oTmp.tracks, oTmp.albums, oTmp.artists);
 		};
 		
 		/**
@@ -23,8 +19,9 @@
 		$scope.playNow = function($event)
 		{
 			$event.preventDefault();
-
-			oPlaylist.play(_getTracks());
+			
+			var oTmp = AlbumFilter($scope.album);
+			oPlaylist.play(oTmp.tracks, oTmp.albums, oTmp.artists);
 		};
 		
 		/**
@@ -40,41 +37,15 @@
 				});
 		}
 		
-		/**
-		 * Get array of formatted tracks objects
-		 * 
-		 * @returns	{Array}
-		 */
-		function _getTracks()
-		{
-			if(angular.isArray(_aTracks))
-			{
-				return _aTracks;
-			}
-			
-			var _aTracks = [],
-				aData	 = $scope.album.tracks.data;
-
-			for(var i = 0; i < aData.length; i++)
-			{
-				var oTrack = aData[i];
-				
-				_aTracks.push({
-					id:		oTrack.id,
-					title:	oTrack.title,
-					artist:	$scope.album.artist
-				});
-			}
-
-			return _aTracks;
-		}
-		
 		_init();
 	}
 	
 	oDeezerpp.controller(
 		'AlbumController',
-		['$scope', '$routeParams', 'DeezerApiService', 'PlaylistService', AlbumController]
+		[
+			'$scope', '$routeParams', 'DeezerApiService', 'PlaylistService', 'PlaylistAlbumFilter',
+			AlbumController
+		]
 	);
 	
 })(oDeezerpp);
