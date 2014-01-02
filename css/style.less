@@ -5,6 +5,15 @@ body {
 	padding-top: 70px;
 }
 
+header.main {
+	h2 {margin-top: 0px;}
+	img {margin-right: 10px;}
+	small {
+		display: block;
+		margin-bottom: 10px;
+	}
+}
+
 .clear-margins {
 	margin: 0px;
 	padding: 0px;
@@ -16,6 +25,42 @@ body {
 	display: inline-block;
 	text-indent: -9999px;
 	background: transparent url(../img/deezer.png) no-repeat;
+}
+
+.image-list {
+	padding-left: 0px;
+	
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+	img {width: 130px;}
+	li {
+		position: relative;
+		margin: 0px 10px 0px 0px;
+	}
+	p, strong {
+		width: 130px;
+		padding: 5px 0px 0px;
+		margin: 0px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	strong {
+		display: block;
+		padding: 0px;
+	}
+	
+	.buttons {
+		position: absolute;
+		visibility: hidden;
+		top: 10px;
+		right: 10px;
+	}
+	li:hover .buttons {
+		visibility: visible;
+	}
 }
 
 #player {
@@ -99,17 +144,6 @@ body {
 }
 @media(min-width:1200px){
 	#player {width: 390px;}
-}
-
-// headers
-#album-page header,
-#artist-page header {
-	h2 {margin-top: 0px;}
-	img {margin-right: 10px;}
-	small {
-		display: block;
-		margin-bottom: 10px;
-	}
 }
 
 #album-page {

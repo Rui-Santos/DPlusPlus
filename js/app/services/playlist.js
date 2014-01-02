@@ -1,7 +1,12 @@
 (function(oDeezerpp)
 {
-	function PlaylistService($rootScope)
+	function PlaylistService($rootScope, oDeezerApi)
 	{
+		var oPlaylist = this;
+		
+		/**
+		 * Adds tracks to playlist
+		 */
 		this.add = function(aTracks, aAlbums, aArtists)
 		{
 			$rootScope.$broadcast(
@@ -10,6 +15,20 @@
 			);
 		};
 
+		/**
+		 * Adds antire album to playlist
+		 * 
+		 * @param	{Int}	iAlbumId	album ID
+		 * @returns	{Undefined}
+		 */
+		this.addAlbum = function(iAlbumId)
+		{
+			manageAlbum(iAlbumId, false);
+		};
+
+		/**
+		 * Plays given tracks
+		 */
 		this.play = function(aTracks, aAlbums, aArtists)
 		{
 			$rootScope.$broadcast(
@@ -17,6 +36,36 @@
 				{tracks: aTracks, albums: aAlbums, artists: aArtists}
 			);
 		};
+
+		/**
+		 * Plays entire album
+		 * 
+		 * @param	{Int}	iAlbumId	album ID
+		 * @returns	{Undefined}
+		 */
+		this.playAlbum = function(iAlbumId)
+		{
+			manageAlbum(iAlbumId, true);
+		};
+		
+		function manageAlbum(iAlbumId, bReplace)
+		{
+			oDeezerApi
+				.getAlbum(iAlbumId)
+				.then(function(oAlbum)
+				{
+					var oTmp = PlaylistAlbumFilter(oAlbum);
+					
+					if(bReplace)
+					{
+						oPlaylist.play(oTmp.tracks, oTmp.albums, oTmp.artists);
+					}
+					else
+					{
+						oPlaylist.add(oTmp.tracks, oTmp.albums, oTmp.artists);
+					}
+				});
+		}
 	}
 	
 	/**
@@ -59,7 +108,7 @@
 	oDeezerpp
 		.service(
 			'PlaylistService',
-			['$rootScope', PlaylistService]
+			['$rootScope', 'DeezerApiService', PlaylistService]
 		)
 		.filter(
 			'PlaylistAlbum',

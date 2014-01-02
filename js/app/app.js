@@ -33,7 +33,7 @@ oDeezerpp.config([
 				'/profile',
 				{
 					controller:	 'UserProfileController',
-					templateUrl: 'templates/userprofile.html',
+					templateUrl: 'templates/user-profile.html',
 					resolve:	 oResolve
 				}
 			)

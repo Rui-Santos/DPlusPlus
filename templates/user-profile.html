@@ -1,0 +1,42 @@
+<section id="user-profile">
+	<header class="main clearfix">
+		<img ng-src="{{user.picture}}?size=medium" class="thumbnail pull-left" alt="">
+		<h2>{{user.name}}</h2>
+	</header>
+	
+	<h3>Favorite albums</h3>
+	<article>
+		<ul class="image-list clearfix">
+			<li ng-repeat="album in albums" class="thumbnail pull-left">
+				<div class="buttons">
+					<button ng-click="playNow(album.id, $event)" class="btn btn-sm" title="Play now">
+						<span class="glyphicon glyphicon-play"></span>
+					</button>
+					<button ng-click="playLast(album.id, $event)" class="btn btn-sm" title="Play last">
+						<span class="glyphicon glyphicon-plus-sign"></span>
+					</button>
+				</div>
+
+				<a href="#/album/{{album.id}}">
+					<img ng-src="{{album.cover}}?size=medium" alt="">
+					<p>
+						<strong>{{album.title}}</strong>
+						{{album.artist.name}}
+					</p>
+				</a>
+			</li>
+		</ul>
+	</article>
+	
+	<h3>Favorite artists</h3>
+	<article>
+		<ul class="image-list clearfix">
+			<li ng-repeat="artist in artists" class="thumbnail pull-left">
+				<a href="#/artist/{{artist.id}}">
+					<img ng-src="{{artist.picture}}?size=medium" alt="">
+					<p>{{artist.name}}</p>
+				</a>
+			</li>
+		</ul>
+	</article>
+</section>

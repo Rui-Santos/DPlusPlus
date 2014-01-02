@@ -54,18 +54,18 @@
 						{
 							_oUser = oUser;
 							_oUser.id = oResponse.userID;
-							
-							$rootScope.$broadcast('user-logged-in', _oUser);
 
 							oDeferred.resolve(_oUser);
+
+							$rootScope.$broadcast('user-logged-in', _oUser);
+							$rootScope.$apply();
 						});
 					}
 					else
 					{
 						oDeferred.reject();
+						$rootScope.$apply();
 					}
-
-					$rootScope.$apply();
 				},
 				{perms: oAppSettings.dz.perms}
 			);
@@ -102,9 +102,9 @@
 			var oDeferred	= $q.defer();
 				sMethod		= (sMethod ? sMethod : 'GET');
 			
-			DZ.api(sUrl, sMethod, oData, function(oData)
+			DZ.api(sUrl, sMethod, oData, function(oResult)
 			{
-				oDeferred.resolve(oData);
+				oDeferred.resolve(oResult);
 				$rootScope.$apply();
 			});
 

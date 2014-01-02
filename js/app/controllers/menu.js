@@ -1,6 +1,6 @@
 (function(oDeezerpp)
 {
-	function MenuController($scope, $rootScope, oSdk)
+	function MenuController($scope, $rootScope, $location, oSdk)
 	{
 		$scope.login = function($event)
 		{
@@ -10,8 +10,10 @@
 			{
 				oSdk.login().then(function(oUser)
 				{
-					$scope.logged = true;
-					$scope.name = oUser.name;
+					$scope.logged	= true;
+					$scope.name		= oUser.name;
+
+					$location.path('profile');
 				});
 			}
 		};
@@ -37,7 +39,7 @@
 	
 	oDeezerpp.controller(
 		'MenuController',
-		['$scope', '$rootScope', 'DeezerSdkService', MenuController]
+		['$scope', '$rootScope', '$location', 'DeezerSdkService', MenuController]
 	);
 	
 })(oDeezerpp);
